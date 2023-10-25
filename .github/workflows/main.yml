@@ -2,6 +2,14 @@ name: build
 on: push
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build coverage file
+        run: |
+          pytest --cache-clear --cov=app test/ > pytest-coverage.txt
+      - name: Comment coverage
+        uses: coroo/pytest-coverage-commentator@v1.0.2
   format:
     runs-on: ubuntu-latest
     timeout-minutes: 10
